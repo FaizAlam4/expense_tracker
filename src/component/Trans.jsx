@@ -4,22 +4,64 @@ import { useState } from "react";
 
 function Trans({ obj, updateData, editData }) {
   const [opt, setOpt] = useState(false);
-  const [newdesc, setNewdesc] = useState("");
-  const [newexp, setNewexp] = useState(0);
-  const [newcat, setNewcat] = useState('');
-
+  const [newData, setnewData] = useState({
+    desc: obj.desc,
+    expense: obj.expense,
+    cat: obj.category,
+  });
 
   const handleEdit = () => {
- 
-    editData({desc:newdesc, exp:newexp,cat:newcat},obj.id)
-    setOpt(false)
+    editData(
+      { desc: newData.desc, exp: newData.expense, cat: newData.cat },
+      obj.id
+    );
+    setOpt(false);
   };
 
   return (
     <div style={{ margin: "30px", lineHeight: "2" }}>
-      <div>Desc:{obj.desc}</div>
-      <div>Expense: {obj.expense}</div>
-      <div>Category: {obj.category}</div>
+      Desc:{" "}
+      <div>
+        {opt ? (
+          <input
+            value={newData.desc}
+            type="text"
+            onChange={(e) => setnewData({ ...newData, desc: e.target.value })}
+          />
+        ) : (
+          obj.desc
+        )}
+      </div>
+      Expense:{" "}
+      <div>
+        {" "}
+        {opt ? (
+          <input
+            value={newData.expense}
+            type="text"
+            onChange={(e) =>
+              setnewData({ ...newData, expense: e.target.value })
+            }
+          />
+        ) : (
+          obj.expense
+        )}
+      </div>
+      Category:{" "}
+      <div>
+        {opt ? (
+          <select
+            value={newData.cat}
+            onChange={(e) => setnewData({ ...newData, cat: e.target.value })}
+          >
+            <option value="all">Pick</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+          </select>
+        ) : (
+          obj.category
+        )}
+      </div>
       <button
         onClick={() => {
           updateData(obj.id);
@@ -29,47 +71,12 @@ function Trans({ obj, updateData, editData }) {
       </button>
       <button
         onClick={() => {
-          setOpt((prev)=>!prev);
+          setOpt((prev) => !prev);
         }}
       >
-        Edit
+        {opt ? "Cancel" : "Edit"}
       </button>
-
-      {opt && (
-        <div>
-          new Desc:{" "}
-          <input
-            value={newdesc}
-            onChange={(e) => {
-              setNewdesc(e.target.value);
-            }}
-            type="text"
-          />
-          <br />
-          new Expense:{" "}
-          <input
-            value={newexp}
-            type="text"
-            onChange={(e) => {
-              setNewexp(e.target.value);
-            }}
-          />
-          <br />
-         new Category: <select value={newcat} onChange={(e)=>{setNewcat(e.target.value)}} name="" id="">
-            <option value="all" selected>Pick</option>
-            <option value="A" >A</option>
-            <option value="B">B</option>
-          </select>
-          <br />
-          <button
-            onClick={() => {
-              handleEdit();
-            }}
-          >
-            Update
-          </button>
-        </div>
-      )}
+      {opt && <button onClick={handleEdit}>Update</button>}
     </div>
   );
 }

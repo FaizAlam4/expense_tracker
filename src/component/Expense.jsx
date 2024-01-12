@@ -29,7 +29,7 @@ function Expense() {
       if (ele.id == id) {
         ele.expense = val.exp;
         ele.desc = val.desc;
-        ele.category=val.cat;
+        ele.category = val.cat;
       }
     });
   };
@@ -73,7 +73,9 @@ function Expense() {
           value={cat}
           required
         >
-          <option value="all" selected>Pick</option>
+          <option value="all" selected>
+            Pick
+          </option>
           <option value="A">A</option>
           <option value="B">B</option>
         </select>
@@ -82,7 +84,6 @@ function Expense() {
         <br />
         <button type="submit">Submit</button>
       </form>
-  
 
       <div>
         <h2>Items Entered:</h2>
