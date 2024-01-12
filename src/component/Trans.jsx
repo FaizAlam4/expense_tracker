@@ -7,10 +7,10 @@ function Trans({ obj, updateData, editData }) {
   const [newdesc, setNewdesc] = useState("");
   const [newexp, setNewexp] = useState(0);
   const [newcat, setNewcat] = useState('');
-  const [val, setVal] = useState({ desc: "", expense: 0 ,cat:''});
+
 
   const handleEdit = () => {
-    setVal({ ...val, desc: newdesc, expense: newexp,cat:newcat });
+ 
     editData({desc:newdesc, exp:newexp,cat:newcat},obj.id)
     setOpt(false)
   };
@@ -56,7 +56,8 @@ function Trans({ obj, updateData, editData }) {
           />
           <br />
          new Category: <select value={newcat} onChange={(e)=>{setNewcat(e.target.value)}} name="" id="">
-            <option value="A" selected>A</option>
+            <option value="all" selected>Pick</option>
+            <option value="A" >A</option>
             <option value="B">B</option>
           </select>
           <br />

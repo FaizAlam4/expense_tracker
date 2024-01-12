@@ -82,6 +82,7 @@ function Expense() {
         <br />
         <button type="submit">Submit</button>
       </form>
+  
 
       <div>
         <h2>Items Entered:</h2>
